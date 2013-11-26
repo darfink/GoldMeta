@@ -87,10 +87,11 @@ namespace gm {
             }
 
             if(mConventionInfo.GetReturn().GetType() != DataType::Void) {
-                mAssembler->mov(ecx, dword_ptr(ebp, 8));
+                // Copy the source address to EAX
+                mAssembler->mov(eax, dword_ptr(ebp, 8));
 
                 if(mHasNonHiddenReturn == true) {
-                    this->SaveReturn(mConventionInfo.GetReturn(), ptr(ecx));
+                    this->SaveReturn(mConventionInfo.GetReturn(), ptr(eax));
                 }
             }
 
