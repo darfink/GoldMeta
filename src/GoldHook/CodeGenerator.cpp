@@ -86,10 +86,12 @@ namespace gm {
                 mAssembler->add(esp, mConventionInfo.GetStackSize());
             }
 
-            if(mHasNonHiddenReturn == true) {
-                // We need to save the return value
+            if(mConventionInfo.GetReturn().GetType() != DataType::Void) {
                 mAssembler->mov(ecx, dword_ptr(ebp, 8));
-                this->SaveReturn(mConventionInfo.GetReturn(), ptr(ecx));
+
+                if(mHasNonHiddenReturn == true) {
+                    this->SaveReturn(mConventionInfo.GetReturn(), ptr(ecx));
+                }
             }
 
             mAssembler->pop(ebp);
