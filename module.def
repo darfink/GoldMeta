@@ -1,0 +1,7 @@
+LIBRARY GoldMeta
+EXPORTS
+    GiveFnptrsToDll
+    GetEntityAPI2
+    GetEntityAPI
+    GetNewDLLFunctions
+    Server_GetBlendingInterface

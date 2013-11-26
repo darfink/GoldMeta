@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E2E9A8E4-D559-40C9-942B-80C405BD846E}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>GoldMeta</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>C:\SteamCMD\cs\cstrike\addons\goldmeta\dlls\</OutDir>
+    <TargetName>goldmeta</TargetName>
+    <IncludePath>C:\Source\udis86-1.7.2\include;C:\Source\AsmJit-1.0\include;./include;C:\Source\hlsdk-2.3-p4\include\hlsdk\dlls;C:\Source\hlsdk-2.3-p4\include\hlsdk\common;C:\Source\hlsdk-2.3-p4\include\hlsdk\engine;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Source\udis86-1.7.2\lib;C:\Source\AsmJit-1.0\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;GOLDMETA_EXPORTS;GOLDMETA;NOMINMAX;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
+      <ForcedIncludeFiles>$(ProjectDir)/src/Default.hpp</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>shell32.lib;libboost_filesystem-vc120-mt-gd-1_55.lib;libboost_program_options-vc120-mt-gd-1_55.lib;asmjit-vc120-x32-mt-s-d.lib;libudis86-vc120-x32-mt-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ModuleDefinitionFile>module.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;GOLDMETA_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="include\GoldMeta\GoldMeta.hpp" />
+    <ClInclude Include="include\GoldMeta\Gold\GoldDefs.hpp" />
+    <ClInclude Include="include\GoldMeta\Gold\IGoldAPI.hpp" />
+    <ClInclude Include="include\GoldMeta\Gold\IGoldHook.hpp" />
+    <ClInclude Include="include\GoldMeta\Gold\IGoldPlugin.hpp" />
+    <ClInclude Include="include\GoldMeta\Gold\IHookContext.hpp" />
+    <ClInclude Include="include\GoldMeta\Gold\IModuleFunction.hpp" />
+    <ClInclude Include="include\GoldMeta\MetaMod.hpp" />
+    <ClInclude Include="include\GoldMeta\Meta\MetaAPI.hpp" />
+    <ClInclude Include="include\GoldMeta\Meta\MetaDefs.hpp" />
+    <ClInclude Include="include\GoldMeta\Shared.hpp" />
+    <ClInclude Include="src\Default.hpp" />
+    <ClInclude Include="src\Exception.hpp" />
+    <ClInclude Include="src\GameLibrary.hpp" />
+    <ClInclude Include="src\GoldHook.hpp" />
+    <ClInclude Include="src\GoldHook\CodeGenerator.hpp" />
+    <ClInclude Include="src\GoldHook\ConventionInfo.hpp" />
+    <ClInclude Include="src\GoldHook\DataType.hpp" />
+    <ClInclude Include="src\GoldHook\Function.hpp" />
+    <ClInclude Include="src\GoldHook\HookContext.hpp" />
+    <ClInclude Include="src\GoldHook\ModuleFunction.hpp" />
+    <ClInclude Include="src\GoldHook\StaticFuntion.hpp" />
+    <ClInclude Include="src\GoldHook\VTableOffset.hpp" />
+    <ClInclude Include="src\HLExport.hpp" />
+    <ClInclude Include="src\HLSDK.hpp" />
+    <ClInclude Include="src\Interface\IEntityExporter.hpp" />
+    <ClInclude Include="src\Interface\IFunctionBase.hpp" />
+    <ClInclude Include="src\Interface\IPluginManager.hpp" />
+    <ClInclude Include="src\Interface\ISharedAPI.hpp" />
+    <ClInclude Include="src\MetaMain.hpp" />
+    <ClInclude Include="src\OS\Library.hpp" />
+    <ClInclude Include="src\OS\OS.hpp" />
+    <ClInclude Include="src\OS\SignatureScanner.hpp" />
+    <ClInclude Include="src\PathManager.hpp" />
+    <ClInclude Include="src\PluginManager.hpp" />
+    <ClInclude Include="src\Plugin\GoldPlugin.hpp" />
+    <ClInclude Include="src\Plugin\MetaPlugin.hpp" />
+    <ClInclude Include="src\Plugin\PluginBase.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\DLLMain.cpp" />
+    <ClCompile Include="src\GameLibrary.cpp" />
+    <ClCompile Include="src\GoldHook.cpp" />
+    <ClCompile Include="src\GoldHook\CodeGenerator.cpp" />
+    <ClCompile Include="src\GoldHook\ConventionInfo.cpp" />
+    <ClCompile Include="src\GoldHook\DataType.cpp" />
+    <ClCompile Include="src\GoldHook\Function.cpp" />
+    <ClCompile Include="src\GoldHook\HookContext.cpp" />
+    <ClCompile Include="src\GoldHook\ModuleFunction.cpp" />
+    <ClCompile Include="src\GoldHook\StaticFunction.cpp" />
+    <ClCompile Include="src\HLExport.cpp" />
+    <ClCompile Include="src\MetaMain.cpp" />
+    <ClCompile Include="src\OS\Library.cpp" />
+    <ClCompile Include="src\OS\OS.cpp" />
+    <ClCompile Include="src\OS\SignatureScanner.cpp" />
+    <ClCompile Include="src\PathManager.cpp" />
+    <ClCompile Include="src\PluginManager.cpp" />
+    <ClCompile Include="src\Plugin\GoldPlugin.cpp" />
+    <ClCompile Include="src\Plugin\MetaPlugin.cpp" />
+    <ClCompile Include="src\Plugin\PluginBase.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\X-wing %40Aliciousness\Documents\Visual Studio 2013\Projects\GoldMeta\module.def" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

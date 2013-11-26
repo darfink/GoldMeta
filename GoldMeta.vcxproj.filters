@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="include\Gold">
+      <UniqueIdentifier>{e6235542-2487-422d-adb4-12ac790d97da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\Meta">
+      <UniqueIdentifier>{55b8036f-0c59-4fc8-a30b-223884ae2638}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\header">
+      <UniqueIdentifier>{c90f3a62-82c6-49f7-9c0b-aae11b3cf8b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\source">
+      <UniqueIdentifier>{8caa8b14-96e3-4cd1-b97f-a4fbdba9e52b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\header\GoldHook">
+      <UniqueIdentifier>{5197c52c-c396-43c8-adec-434b5cc97743}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\header\Interface">
+      <UniqueIdentifier>{e782072a-eb72-484a-8056-0489bc09f699}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\header\OS">
+      <UniqueIdentifier>{8049fba7-f6bb-4988-a67e-c881b0c220ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\header\Plugin">
+      <UniqueIdentifier>{7a4c2ce2-1993-4090-a64b-4583743d3a74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\source\GoldHook">
+      <UniqueIdentifier>{fa001002-1a97-4c0b-89b6-bbe4024e4508}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\source\OS">
+      <UniqueIdentifier>{c7ee3e2a-0f07-4237-89fa-154b4e86fab5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\source\Plugin">
+      <UniqueIdentifier>{0cfcf748-4696-4c6e-a3b4-33c5bc412162}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\GoldMeta\Gold\GoldDefs.hpp">
+      <Filter>include\Gold</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GoldMeta\Gold\IGoldAPI.hpp">
+      <Filter>include\Gold</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GoldMeta\Gold\IGoldHook.hpp">
+      <Filter>include\Gold</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GoldMeta\Gold\IGoldPlugin.hpp">
+      <Filter>include\Gold</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GoldMeta\Gold\IHookContext.hpp">
+      <Filter>include\Gold</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GoldMeta\Gold\IModuleFunction.hpp">
+      <Filter>include\Gold</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GoldMeta\Meta\MetaAPI.hpp">
+      <Filter>include\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GoldMeta\Meta\MetaDefs.hpp">
+      <Filter>include\Meta</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GoldMeta\GoldMeta.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GoldMeta\MetaMod.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GoldMeta\Shared.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GoldHook\CodeGenerator.hpp">
+      <Filter>src\header\GoldHook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GoldHook\ConventionInfo.hpp">
+      <Filter>src\header\GoldHook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GoldHook\DataType.hpp">
+      <Filter>src\header\GoldHook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GoldHook\Function.hpp">
+      <Filter>src\header\GoldHook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GoldHook\HookContext.hpp">
+      <Filter>src\header\GoldHook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GoldHook\ModuleFunction.hpp">
+      <Filter>src\header\GoldHook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GoldHook\StaticFuntion.hpp">
+      <Filter>src\header\GoldHook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GoldHook\VTableOffset.hpp">
+      <Filter>src\header\GoldHook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Interface\IEntityExporter.hpp">
+      <Filter>src\header\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Interface\IFunctionBase.hpp">
+      <Filter>src\header\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Interface\IPluginManager.hpp">
+      <Filter>src\header\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Interface\ISharedAPI.hpp">
+      <Filter>src\header\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Plugin\GoldPlugin.hpp">
+      <Filter>src\header\Plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Plugin\MetaPlugin.hpp">
+      <Filter>src\header\Plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Plugin\PluginBase.hpp">
+      <Filter>src\header\Plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OS\Library.hpp">
+      <Filter>src\header\OS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OS\OS.hpp">
+      <Filter>src\header\OS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OS\SignatureScanner.hpp">
+      <Filter>src\header\OS</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Default.hpp">
+      <Filter>src\header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Exception.hpp">
+      <Filter>src\header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameLibrary.hpp">
+      <Filter>src\header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GoldHook.hpp">
+      <Filter>src\header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HLExport.hpp">
+      <Filter>src\header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HLSDK.hpp">
+      <Filter>src\header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MetaMain.hpp">
+      <Filter>src\header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PathManager.hpp">
+      <Filter>src\header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PluginManager.hpp">
+      <Filter>src\header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\DLLMain.cpp">
+      <Filter>src\source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameLibrary.cpp">
+      <Filter>src\source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GoldHook.cpp">
+      <Filter>src\source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HLExport.cpp">
+      <Filter>src\source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MetaMain.cpp">
+      <Filter>src\source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PathManager.cpp">
+      <Filter>src\source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PluginManager.cpp">
+      <Filter>src\source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GoldHook\CodeGenerator.cpp">
+      <Filter>src\source\GoldHook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GoldHook\ConventionInfo.cpp">
+      <Filter>src\source\GoldHook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GoldHook\DataType.cpp">
+      <Filter>src\source\GoldHook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GoldHook\Function.cpp">
+      <Filter>src\source\GoldHook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GoldHook\HookContext.cpp">
+      <Filter>src\source\GoldHook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GoldHook\ModuleFunction.cpp">
+      <Filter>src\source\GoldHook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GoldHook\StaticFunction.cpp">
+      <Filter>src\source\GoldHook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plugin\GoldPlugin.cpp">
+      <Filter>src\source\Plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plugin\MetaPlugin.cpp">
+      <Filter>src\source\Plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plugin\PluginBase.cpp">
+      <Filter>src\source\Plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OS\Library.cpp">
+      <Filter>src\source\OS</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OS\OS.cpp">
+      <Filter>src\source\OS</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OS\SignatureScanner.cpp">
+      <Filter>src\source\OS</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\X-wing %40Aliciousness\Documents\Visual Studio 2013\Projects\GoldMeta\module.def" />
+    <None Include="README.md" />
+  </ItemGroup>
+</Project>
