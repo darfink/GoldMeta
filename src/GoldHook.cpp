@@ -42,7 +42,7 @@ namespace gm {
             retType.SetType(DataType::Structure);
             retType.SetSize(12);
 
-            mStaticFunctions[name] = std::make_shared<StaticFunction>(name, ConventionInfo(CallingConvention::Thiscall, retType, { retType, retType, DataType::FromType<float>(), DataType::FromType<float>(), DataType::FromType<int>(), DataType::FromType<int>(), DataType::FromType<int>(), DataType::FromType<float>(), DataType::FromType<void*>(), DataType::FromType<bool>(), DataType::FromType<int>() }), add);
+            mStaticFunctions[name] = std::make_shared<StaticFunction>(name, ConventionInfo(CallingConvention::Thiscall, /*retType*/DataType::FromType<double>(), { DataType::FromType<double>(), retType, retType, DataType::FromType<float>(), DataType::FromType<float>(), DataType::FromType<int>(), DataType::FromType<int>(), DataType::FromType<int>(), DataType::FromType<float>(), DataType::FromType<void*>(), DataType::FromType<bool>(), DataType::FromType<int>() }), add);
         }
 
         return mStaticFunctions.find(name)->second->GetModule(id);

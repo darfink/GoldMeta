@@ -115,13 +115,12 @@ namespace gm {
                 func->SetListener(brute_cast<void*>(&MetaMain::EntityHook), this, Tense::Pre);
 
                 SignatureScanner sa(reinterpret_cast<uintptr_t>(*blendingInterface));
-                //uintptr_t loa = sa.FindSignature({ 0x81, 0xEC, 0x00, 0x00, 0x00, 0x00, 0x8B, 0x84, 0x00, 0x00, 0x00, 0x00, 0x00, 0x53, 0x55, 0x56 }, "xx????xx?????xxx");
-                //uintptr_t loa = sa.FindSignature({ 0xFF, 0x15, 0x00, 0x00, 0x00, 0x00, 0x8b, 0x44, 0x24, 0x70, 0x83 }, "xx????xxxxx", 2);
                 uintptr_t loa = sa.FindSignature({ 0x53, 0x55, 0x89, 0x44, 0x00, 0x00, 0xA1, 0x00, 0x00, 0x00, 0x00, 0x56 }, "xxxx??x????x", -13);
 
                 struct Vector { float x, y, z; };
-                Vector(__stdcall*asda)(IHookContext*, Vector, Vector, float, float, int, int, int, float, void*, bool, int) = [](
-                    IHookContext* context,
+
+                double(__stdcall*original)(double, Vector, Vector, float, float, int, int, int, float, void*, bool, int) = [](
+                    double test,
                     Vector source,
                     Vector direction,
                     float spread,
@@ -132,15 +131,35 @@ namespace gm {
                     float rangeModifier,
                     void* attacker,
                     bool isPistol,
-                    int sharedRandom) -> Vector {
-                    context->SetResult(Result::Ignored);
-                    return source;
+                    int sharedRandom) {
+                    return 2000.0;
+                };
+
+                double(__stdcall*override)(IHookContext*, double, Vector, Vector, float, float, int, int, int, float, void*, bool, int) = [](
+                    IHookContext* context,
+                    double test,
+                    Vector source,
+                    Vector direction,
+                    float spread,
+                    float distance,
+                    int penetration,
+                    int bulletType,
+                    int damage,
+                    float rangeModifier,
+                    void* attacker,
+                    bool isPistol,
+                    int sharedRandom) {
+                    context->SetResult(Result::Handled);
+                    return 1000.0;
                 };
 
                 // TODO: Check return value when override and supersede
-                IModuleFunction* funa = mGoldHook->GetFunction(PluginId(1), "FireBullets3", reinterpret_cast<void*>(loa));
-                funa->SetListener(brute_cast<void*>(asda), this, Tense::Pre);
+                IModuleFunction* funa = mGoldHook->GetFunction(PluginId(1), "FireBullets3", reinterpret_cast<void*>(original));
+                funa->SetListener(brute_cast<void*>(override), this, Tense::Pre);
 
+                double test = 8223372036854774807.123;
+                double res = original(test, { 1.0f, 2.0f, 3.0f }, { 4.0f, 5.0f, 6.0f }, 7.0f, 8.0f, 1337, 5, 25, 9.0f, nullptr, true, 2143365);
+                int x = 5;
                 break;
             }
         }

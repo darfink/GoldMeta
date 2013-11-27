@@ -87,7 +87,7 @@ namespace gm {
             }
 
             if(mConventionInfo.GetReturn().GetType() != DataType::Void) {
-                // Copy the source address to EAX
+                // Copy the source address to the EAX register
                 mAssembler->mov(eax, dword_ptr(ebp, 8));
 
                 if(mHasNonHiddenReturn == true) {
@@ -220,6 +220,7 @@ namespace gm {
                 }
             }
 
+            // TODO: Avoid this useless jump for void functions
             mAssembler->jmp(skipCopyReturn);
             mAssembler->bind(skipOrigCall);
 
@@ -278,11 +279,11 @@ namespace gm {
 
             if(mConventionInfo.GetReturn().GetType() != DataType::Void) {
                 // If it is a hidden return, we just need to return the pointer
-                mAssembler->mov(eax, dword_ptr(returnData));
+                mAssembler->mov(ecx, dword_ptr(returnData));
           
                 if(mHasNonHiddenReturn == true) {
                     // Otherwise we need to copy the data to the appropriate register
-                    this->SetReturn(mConventionInfo.GetReturn(), ptr(eax));
+                    this->SetReturn(mConventionInfo.GetReturn(), ptr(ecx));
                 }
             }
 
@@ -480,9 +481,8 @@ namespace gm {
                         break;
 
                     case sizeof(uint64):
-                        source.setDisplacement(displacement - sizeof(size_t));
                         mAssembler->push(source);
-                        source.setDisplacement(displacement);
+                        source.setDisplacement(displacement - sizeof(size_t));
                         mAssembler->push(source);
 
                         break;
@@ -493,9 +493,15 @@ namespace gm {
 
             case DataType::FloatingPoint: {
                 source.setSize(typeSize);
+
+                if(typeSize == sizeof(double)) {
+                    source.setDisplacement(displacement - sizeof(size_t));
+                }
+
                 mAssembler->fld(source);
                 mAssembler->sub(esp, typeSize);
                 mAssembler->fstp(ptr(esp, 0, typeSize));
+
                 break;
             }
         }
@@ -532,7 +538,7 @@ namespace gm {
 
                     case sizeof(uint64):
                         mAssembler->mov(destination, eax);
-                        destination.setDisplacement(sizeof(size_t));
+                        destination.setDisplacement(destination.getDisplacement() - sizeof(size_t));
                         mAssembler->mov(destination, edx);
                         break;
                 }
@@ -576,7 +582,7 @@ namespace gm {
 
                     case sizeof(uint64):
                         mAssembler->mov(eax, source);
-                        source.setDisplacement(sizeof(size_t));
+                        source.setDisplacement(source.getDisplacement() - sizeof(size_t));
                         mAssembler->mov(edx, source);
                         break;
                 }
@@ -587,6 +593,7 @@ namespace gm {
             case DataType::FloatingPoint: {
                 source.setSize(typeSize);
                 mAssembler->fld(source);
+
                 break;
             }
         }
@@ -635,19 +642,22 @@ namespace gm {
                         mAssembler->mov(destination, ax);
                         break;
 
-                    case sizeof(uint) :
+                    case sizeof(uint):
                         mAssembler->mov(eax, source);
                         mAssembler->mov(destination, eax);
                         break;
 
                     case sizeof(uint64):
+                        size_t sourceDisp = source.getDisplacement();
+                        size_t destDisp = destination.getDisplacement();
+
                         // We copy two double words
                         for(int i = 0; i < 2; i++) {
-                            destination.setDisplacement(sizeof(size_t) * i);
-                            source.setDisplacement(sizeof(size_t) * i);
+                            destination.setDisplacement(destDisp - sizeof(size_t) * i);
+                            source.setDisplacement(sourceDisp - sizeof(size_t) * i);
 
-                            mAssembler->mov(eax, source);
-                            mAssembler->mov(destination, eax);
+                            mAssembler->mov(ecx, source);
+                            mAssembler->mov(destination, ecx);
                         }
 
                         break;
