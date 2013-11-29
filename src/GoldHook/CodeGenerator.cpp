@@ -48,11 +48,11 @@ namespace gm {
             size_t index = mConventionInfo.GetParameters().size() + (mConventionInfo.IsMethod() ? sizeof(uintptr_t) : 0);
 
             if(index > 0) {
-                // Copy the 'arguments' array pointer to ECX
-                mAssembler->mov(ecx, dword_ptr(ebp, 12));
+                // Copy the 'arguments' array pointer to EDX
+                mAssembler->mov(edx, dword_ptr(ebp, 12));
 
                 for(const DataType& parameter : mConventionInfo.GetParameters()) {
-                    mAssembler->mov(eax, ptr(ecx, --index * sizeof(uintptr_t)));
+                    mAssembler->mov(eax, ptr(edx, --index * sizeof(uintptr_t)));
                     this->PushParameter(parameter, ptr(eax));
                 }
 
@@ -88,10 +88,10 @@ namespace gm {
 
             if(mConventionInfo.GetReturn().GetType() != DataType::Void) {
                 // Copy the source address to the EAX register
-                mAssembler->mov(eax, dword_ptr(ebp, 8));
+                mAssembler->mov(ecx, dword_ptr(ebp, 8));
 
                 if(mHasNonHiddenReturn == true) {
-                    this->SaveReturn(mConventionInfo.GetReturn(), ptr(eax));
+                    this->SaveReturn(mConventionInfo.GetReturn(), ptr(ecx));
                 }
             }
 
@@ -226,9 +226,9 @@ namespace gm {
 
             if(mConventionInfo.GetReturn().GetType() != DataType::Void) {
                 // The function has been superseded, so we set the original return value to the overridden one (since no original value exists)
-                mAssembler->mov(eax, dword_ptr(ebx, offsetof(HookContext, overrideReturn)));
+                mAssembler->mov(ecx, dword_ptr(ebx, offsetof(HookContext, overrideReturn)));
                 mAssembler->mov(edx, dword_ptr(ebx, offsetof(HookContext, originalReturn)));
-                this->CopyData(mConventionInfo.GetReturn(), ptr(eax), ptr(edx));
+                this->CopyData(mConventionInfo.GetReturn(), ptr(ecx), ptr(edx));
             }
 
             mAssembler->bind(skipCopyReturn);
@@ -415,18 +415,18 @@ namespace gm {
                 mAssembler->jb(iterateModule);
 
                 // We need to dereference the addresses twice, so we move them to EAX:EDX first
-                mAssembler->mov(eax, dword_ptr(ebx, offsetof(HookContext, currentReturn)));
+                mAssembler->mov(ecx, dword_ptr(ebx, offsetof(HookContext, currentReturn)));
                 mAssembler->mov(edx, dword_ptr(ebx, offsetof(HookContext, overrideReturn)));
 
                 // Then we copy data data between the source to the destination
-                this->CopyData(mConventionInfo.GetReturn(), ptr(eax), ptr(edx));
+                this->CopyData(mConventionInfo.GetReturn(), ptr(ecx), ptr(edx));
             }
         }
         mAssembler->jmp(iterateModule);
         mAssembler->bind(endCallModule);
     }
 
-    // NOTE: This method may only touch the EDX register
+    // This method may only touch the ECX, ESI and/or EDI registers
     size_t CodeGenerator::PushParameter(const DataType& type, Mem source) {
         size_t displacement = source.getDisplacement();
         size_t typeSize = type.GetSize();
@@ -453,15 +453,15 @@ namespace gm {
                         if(typeSize <= sizeof(uint) * 6 && typeSize % sizeof(uint) == 0) {
                             // We push one double word at a time
                             source.setSize(sizeof(uint));
-                            mAssembler->mov(eax, esp);
 
+                            // We updated the displacement value
                             displacement = source.getDisplacement();
 
                             for(size_t index = 0; index < typeSize; index += sizeof(uint)) {
                                 source.setDisplacement(displacement + index);
 
-                                mAssembler->mov(edx, source);
-                                mAssembler->mov(dword_ptr(eax, index), edx);
+                                mAssembler->mov(ecx, source);
+                                mAssembler->mov(dword_ptr(esp, index), ecx);
                             }
                         } else /* It's more effective with a bitwise copy operation */ {
                             this->PerformBitwiseCopy(typeSize, source, ptr(esp));
@@ -472,8 +472,8 @@ namespace gm {
 
                     case sizeof(byte):
                     case sizeof(ushort):
-                        mAssembler->movzx(edx, source);
-                        mAssembler->push(edx);
+                        mAssembler->movzx(ecx, source);
+                        mAssembler->push(ecx);
                         break;
 
                     case sizeof(uint):
@@ -509,7 +509,6 @@ namespace gm {
         return type.GetStackSize();
     }
 
-    // May not touch the ECX register
     void CodeGenerator::SaveReturn(const DataType& type, Mem destination) {
         size_t typeSize = type.GetSize();
 
@@ -617,6 +616,7 @@ namespace gm {
         }
     }
 
+    // May only touch the EAX register (and x87 floating point stack)
     void CodeGenerator::CopyData(const DataType& type, AsmJit::Mem source, AsmJit::Mem destination) {
         size_t typeSize = type.GetSize();
 
@@ -656,8 +656,8 @@ namespace gm {
                             destination.setDisplacement(destDisp - sizeof(size_t) * i);
                             source.setDisplacement(sourceDisp - sizeof(size_t) * i);
 
-                            mAssembler->mov(ecx, source);
-                            mAssembler->mov(destination, ecx);
+                            mAssembler->mov(eax, source);
+                            mAssembler->mov(destination, eax);
                         }
 
                         break;
