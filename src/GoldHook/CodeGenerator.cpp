@@ -57,7 +57,7 @@ namespace gm {
                 }
 
                 if(mConventionInfo.IsMethod()) {
-                    mAssembler->mov(eax, ptr(ecx, 0));
+                    mAssembler->mov(eax, dword_ptr(edx, 0));
                     mAssembler->mov(eax, dword_ptr(eax));
                     mAssembler->mov(dword_ptr(callerContext), eax);
                 }
