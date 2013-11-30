@@ -153,10 +153,12 @@ namespace gm {
 
             // ------------------------------------------------------
 
-            // Copy the hook context to EBX
+            // These are not scratch registers, they need to be preserved
             mAssembler->push(ebx);
             mAssembler->push(esi);
             mAssembler->push(edi);
+
+            // Copy the hook context to EBX
             mAssembler->mov(ebx, eax);
 
             // Copy the caller address to the hook context
