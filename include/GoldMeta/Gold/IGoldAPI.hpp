@@ -6,6 +6,7 @@ namespace HL {
     // Forward declarations
     typedef struct globalvars_s globalvars_t;
     typedef struct entvars_s entvars_t;
+    class IFileSystem;
 }
 
 namespace gm {
@@ -18,6 +19,11 @@ namespace gm {
         /// Gets the HL engine globals
         /// </summary>
         virtual HL::globalvars_t* GetEngineGlobals() = 0;
+
+        /// <summary>
+        /// Gets the HL engine file system API
+        /// </summary>
+        virtual HL::IFileSystem* GetEngineFileSystem() = 0;
 
         /// <summary>
         /// Gets the specific game information
