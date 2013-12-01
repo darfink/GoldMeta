@@ -148,7 +148,7 @@
     <ClCompile Include="src\Plugin\PluginBase.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\..\X-wing %40Aliciousness\Documents\Visual Studio 2013\Projects\GoldMeta\module.def" />
+    <None Include="module.def" />
     <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
