@@ -1,0 +1,3 @@
+[submodule "halflife"]
+	path = halflife
+	url = git://github.com/ValveSoftware/halflife

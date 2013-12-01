@@ -43,7 +43,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>C:\SteamCMD\cs\cstrike\addons\goldmeta\dlls\</OutDir>
     <TargetName>goldmeta</TargetName>
-    <IncludePath>C:\Source\udis86-1.7.2\include;C:\Source\AsmJit-1.0\include;./include;C:\Source\hlsdk-2.3-p4\include\hlsdk\dlls;C:\Source\hlsdk-2.3-p4\include\hlsdk\common;C:\Source\hlsdk-2.3-p4\include\hlsdk\engine;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Source\udis86-1.7.2\include;C:\Source\AsmJit-1.0\include;./include;./halflife/dlls;./halflife/common;./halflife/engine;./halflife/public;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Source\udis86-1.7.2\lib;C:\Source\AsmJit-1.0\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -55,7 +55,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;GOLDMETA_EXPORTS;GOLDMETA;NOMINMAX;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;GOLDMETA_EXPORTS;GOLDMETA;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
       <ForcedIncludeFiles>$(ProjectDir)/src/Default.hpp</ForcedIncludeFiles>
