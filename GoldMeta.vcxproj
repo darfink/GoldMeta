@@ -44,7 +44,7 @@
     <OutDir>C:\SteamCMD\cs\cstrike\addons\goldmeta\dlls\</OutDir>
     <TargetName>goldmeta</TargetName>
     <IncludePath>./udis86;C:\Source\AsmJit-1.0\include;./include;./halflife/dlls;./halflife/common;./halflife/engine;./halflife/public;$(IncludePath)</IncludePath>
-    <LibraryPath>./udis86/BuildVS2010/Build/Lib/x86;C:\Source\AsmJit-1.0\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>./udis86/lib;C:\Source\AsmJit-1.0\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -63,7 +63,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>shell32.lib;libboost_filesystem-vc120-mt-gd-1_55.lib;libboost_program_options-vc120-mt-gd-1_55.lib;asmjit-vc120-x32-mt-s-d.lib;libudis86.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shell32.lib;libboost_filesystem-vc120-mt-gd-1_55.lib;libboost_program_options-vc120-mt-gd-1_55.lib;asmjit-vc120-x32-mt-s-d.lib;udis86-vc120-x32-mt-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>module.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>

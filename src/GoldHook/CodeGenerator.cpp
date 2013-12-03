@@ -1,6 +1,3 @@
-#ifndef ASMJIT_API
-# define ASMJIT_API
-#endif
 #include <asmjit/asmjit.h>
 #include <GoldMeta/Gold/IModuleFunction.hpp>
 #include <boost/range/adaptor/reversed.hpp>

@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef ASMJIT_API
-# define ASMJIT_API
-#endif
 #include <asmjit/asmjit.h>
 #include <string>
 #include <memory>
