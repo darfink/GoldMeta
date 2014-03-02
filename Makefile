@@ -17,3 +17,5 @@ all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
 	$(CC) $(FLAGS) $(CFLAGS) $(DEBUGFLAGS) -o $(TARGET) $(OBJECTS) $(LDFLAGS)
+
+# vim: set ts=2 sw=4 noexpandtab: #
