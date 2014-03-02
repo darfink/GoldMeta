@@ -87,7 +87,7 @@ namespace gm {
 
         // Retrieve the current hook context that will be used
         HookContext* context = mHookContexts[mCallCount - 1].get();
-       
+
         context->Reset();
         return context;
     }

@@ -37,7 +37,7 @@ namespace gm {
     /// The exception class that generic OS functions throw
     /// </summary>
     GM_DEFINE_EXCEPTION(Exception);
-    
+
     /// <summary>
     /// Gets the executables command line arguments
     /// </summary>
@@ -51,7 +51,7 @@ namespace gm {
         void* baseAddress;
         size_t size;
     };
-    
+
     /// <summary>
     /// Gets all modules contained in the current process
     /// </summary>
