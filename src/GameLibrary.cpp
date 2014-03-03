@@ -44,7 +44,7 @@ namespace gm {
 
                     if(!mGetEntityAPI) {
                         // We need to cache this address for the lambda so it can capture it
-                        HL::FNGetEntityAPI fnGetEntityApi = reinterpret_cast<HL::FNGetEntityAPI>(mLibrary.GetSymbol("GetEntityAPI"));
+                        HL::FNGetEntityAPI fnGetEntityApi = brute_cast<HL::FNGetEntityAPI>(mLibrary.GetSymbol("GetEntityAPI"));
 
                         // Since the obsolete version of 'GetEntityAPI' doesn't take a pointer for the version,
                         // argument we use a lambda for the compatibility conversion (i.e we can't feed it a pointer)
@@ -74,7 +74,7 @@ namespace gm {
 
     HL::FNEntity GameLibrary::GetEntity(const std::string& symbol) {
         assert(symbol.length() > 0);
-        return reinterpret_cast<HL::FNEntity>(mLibrary.GetSymbol(symbol, false));
+        return brute_cast<HL::FNEntity>(mLibrary.GetSymbol(symbol, false));
     }
 
     const std::string& GameLibrary::GetPath() const {

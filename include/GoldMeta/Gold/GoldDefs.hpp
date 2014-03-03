@@ -15,7 +15,7 @@ namespace gm {
     /// <summary>
     /// The API function that needs to expose the global 'IGoldPlugin' instance
     /// </summary>
-    typedef IGoldPlugin*(__cdecl *FNGetPluginInstance)();
+    typedef IGoldPlugin*(*FNGetPluginInstance)();
 
     /// <summary>
     /// The symbol used to identify the plugin instance API function

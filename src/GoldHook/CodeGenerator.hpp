@@ -1,17 +1,19 @@
 #pragma once
 
 #include <GoldMeta/Gold/IModuleFunction.hpp>
+#include <asmjit/asmjit.h>
 #include <memory>
 
 #include "DataType.hpp"
 #include "ConventionInfo.hpp"
 #include "../Interface/IFunctionBase.hpp"
+#include "../OS/OS.hpp"
 
 namespace gm {
     /// <summary>
     /// The type of a 'call hook' function pointer
     /// </summary>
-    typedef void(__stdcall *FNCallHook)(void*, const void*[]);
+    typedef void(STDCALL *FNCallHook)(void*, const void*[]);
 
     class CodeGenerator {
     public:

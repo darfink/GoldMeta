@@ -6,6 +6,7 @@
 # define GM_EXPORT extern "C" __declspec(dllexport)
 # ifndef WINAPI
 #  define WINAPI __stdcall
+#  define STDCALL __stdcall
 # endif
 #else
 # ifndef __GNUC__
@@ -14,6 +15,7 @@
 # define GM_STATIC_ENTRY __attribute__((constructor))
 # define GM_STATIC_EXIT __attribute__((destructor))
 # define GM_EXPORT extern "C"
+# define STDCALL __attribute((ms_abi))
 # define WINAPI
 # if __APPLE__
 # elif __linux__
