@@ -19,9 +19,9 @@ namespace HL {
     typedef struct dll_functions_s DLL_FUNCTIONS;
 
     typedef void(WINAPI *FNGiveFnptrsToDll)(enginefuncs_t*, globalvars_t*);
-    typedef int(__cdecl *FNGetNewDLLFunctions)(NEW_DLL_FUNCTIONS*, int*);
-    typedef int(__cdecl *FNGetEntityAPI2)(DLL_FUNCTIONS*, int*);
-    typedef int(__cdecl *FNGetEntityAPI)(DLL_FUNCTIONS*, int);
+    typedef int(*FNGetNewDLLFunctions)(NEW_DLL_FUNCTIONS*, int*);
+    typedef int(*FNGetEntityAPI2)(DLL_FUNCTIONS*, int*);
+    typedef int(*FNGetEntityAPI)(DLL_FUNCTIONS*, int);
 }
 
 namespace gm { namespace Meta {
@@ -64,27 +64,27 @@ namespace gm { namespace Meta {
     /// <summary>
     /// The Metamod API function called during initialization
     /// </summary>
-    typedef void(__cdecl *FNMetaInit)();
+    typedef void(*FNMetaInit)();
 
     /// <summary>
     /// The Metamod API function called when the plugin needs to be queried
     /// </summary>
-    typedef int(__cdecl *FNMetaQuery)(const char*, PluginInfo**, MetaAPI*);
+    typedef int(*FNMetaQuery)(const char*, PluginInfo**, MetaAPI*);
 
     /// <summary>
     /// The Metamod API function called when the plugin is attached
     /// </summary>
-    typedef int(__cdecl *FNMetaAttach)(LoadTime, Functions*, Globals*, GameLibraryFunctions*);
+    typedef int(*FNMetaAttach)(LoadTime, Functions*, Globals*, GameLibraryFunctions*);
 
     /// <summary>
     /// The Metamod API function called when the plugin is detached
     /// </summary>
-    typedef int(__cdecl *FNMetaDetach)(LoadTime, UnloadReason);
+    typedef int(*FNMetaDetach)(LoadTime, UnloadReason);
 
     /// <summary>
     /// The Metamod API function for supplying the engine functions
     /// </summary>
-    typedef int(__cdecl *FNGetEngineFunctions)(HL::enginefuncs_t*, int*);
+    typedef int(*FNGetEngineFunctions)(HL::enginefuncs_t*, int*);
 
     /// <summary>
     /// The Metamod API globals (this is mimicked in 'HookContext')
