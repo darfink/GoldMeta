@@ -7,7 +7,7 @@
 #include "Exception.hpp"
 
 namespace HL {
-    typedef void*(__cdecl *FNEntity)(struct entvars_s*);
+    typedef void*(*FNEntity)(struct entvars_s*);
 }
 
 namespace gm {

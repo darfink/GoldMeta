@@ -3,6 +3,8 @@
 #include <exception>
 #include <string>
 
+#include "Default.hpp"
+
 // A shorthand define to create class specific exceptions
 #define GM_DEFINE_EXCEPTION(name) GM_DEFINE_EXCEPTION_INHERIT(name, GoldMetaException)
 
@@ -12,7 +14,7 @@
         name(std::string exception) : inherit(exception) {}  \
         name(const format& format) : inherit(str(format)) {} \
         ~name() throw() {}                                   \
-    };
+    }
 
 namespace gm {
     class GoldMetaException : public std::exception {

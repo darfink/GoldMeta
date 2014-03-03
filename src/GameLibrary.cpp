@@ -1,3 +1,4 @@
+#include <GoldMeta/Shared.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/range.hpp>
 
@@ -32,14 +33,14 @@ namespace gm {
 
             // Check whether this file object is a library or not
             if(path.extension() == Library::GetExtension()) {
-                try /* Attempt to load the library */ { 
+                try /* Attempt to load the library */ {
                     mLibrary.Load(path.string());
 
                     // The only exports required are 'GiveFnptrsToDll' and either one of the entity APIs
-                    mGiveFnptrsToDll      = reinterpret_cast<HL::FNGiveFnptrsToDll>     (mLibrary.GetSymbol("GiveFnptrsToDll"));
-                    mGetBlendingInterface = reinterpret_cast<HL::FNGetBlendingInterface>(mLibrary.GetSymbol("Server_GetBlendingInterface", false));
-                    mGetNewDLLFunctions   = reinterpret_cast<HL::FNGetNewDLLFunctions>  (mLibrary.GetSymbol("GetNewDLLFunctions", false));
-                    mGetEntityAPI         = reinterpret_cast<HL::FNGetEntityAPI2>       (mLibrary.GetSymbol("GetEntityAPI2", false));
+                    mGiveFnptrsToDll      = brute_cast<HL::FNGiveFnptrsToDll>     (mLibrary.GetSymbol("GiveFnptrsToDll"));
+                    mGetBlendingInterface = brute_cast<HL::FNGetBlendingInterface>(mLibrary.GetSymbol("Server_GetBlendingInterface", false));
+                    mGetNewDLLFunctions   = brute_cast<HL::FNGetNewDLLFunctions>  (mLibrary.GetSymbol("GetNewDLLFunctions", false));
+                    mGetEntityAPI         = brute_cast<HL::FNGetEntityAPI2>       (mLibrary.GetSymbol("GetEntityAPI2", false));
 
                     if(!mGetEntityAPI) {
                         // We need to cache this address for the lambda so it can capture it
@@ -60,7 +61,7 @@ namespace gm {
                 } catch(const Library::SymbolNotFound& ex) {
                     std::cerr << format("[WARNING] Symbol error for library %s: %s\n") % path % ex.what();
                 }
-            
+
                 // In case we failed, unload
                 mLibrary.Unload();
             }

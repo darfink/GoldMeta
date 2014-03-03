@@ -1,3 +1,4 @@
+#include <new>
 #ifdef _WIN32
 # include <windows.h>
 #endif
@@ -6,14 +7,18 @@
 #include "OS/OS.hpp"
 
 namespace gm {
-    bool DLLEntry() GM_STATIC_ENTRY {
+    // Declarations (required for GCC attributes)
+    bool DLLEntry() GM_STATIC_ENTRY;
+    bool DLLExit() GM_STATIC_EXIT;
+
+    bool DLLEntry() {
         // Allocate our global instance
-        gMetaMain = new MetaMain();
+        gMetaMain = new (std::nothrow) MetaMain();
 
         if(gMetaMain == nullptr) {
 #ifndef _WIN32
             // We cannot return false and exit the library on Linux or Mac OS X, so we use an exception instead
-            throw std::exception("failed to allocate GoldMeta instance");
+            throw std::runtime_error("failed to allocate GoldMeta instance");
 #endif
             return false;
         } else {
@@ -21,7 +26,7 @@ namespace gm {
         }
     }
 
-    bool DLLExit() GM_STATIC_EXIT {
+    bool DLLExit() {
         if(gMetaMain != nullptr) {
             delete gMetaMain;
             gMetaMain = nullptr;

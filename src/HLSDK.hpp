@@ -1,11 +1,15 @@
 #pragma once
 
+// Enclose everything in the Half-Life namespace
 namespace HL {
-    // Enclose everything in the Half-Life namespace
     #include <extdll.h>
     #include <edict.h>
     #include <eiface.h>
     #include <r_studioint.h>
+
+    #ifndef _WIN32
+    # define WINAPI
+    #endif
 
     struct UserMessage {
         int index;         // 0x0000
@@ -24,11 +28,11 @@ namespace HL {
     /// <summary>
     /// The entity exporter function type
     /// </summary>
-    typedef void*(__cdecl *FNEntity)(HL::entvars_t*);
+    typedef void*(*FNEntity)(HL::entvars_t*);
 
     typedef void(WINAPI *FNGiveFnptrsToDll)(HL::enginefuncs_t*, HL::globalvars_t*);
-    typedef int(__cdecl *FNGetBlendingInterface)(int, HL::sv_blending_interface_t**, HL::engine_studio_api_t*, float(*)[3][4], float(*)[128][3][4]);
-    typedef int(__cdecl *FNGetNewDLLFunctions)(HL::NEW_DLL_FUNCTIONS*, int*);
-    typedef int(__cdecl *FNGetEntityAPI2)(HL::DLL_FUNCTIONS*, int*);
-    typedef int(__cdecl *FNGetEntityAPI)(HL::DLL_FUNCTIONS*, int);
+    typedef int(*FNGetBlendingInterface)(int, HL::sv_blending_interface_t**, HL::engine_studio_api_t*, float(*)[3][4], float(*)[128][3][4]);
+    typedef int(*FNGetNewDLLFunctions)(HL::NEW_DLL_FUNCTIONS*, int*);
+    typedef int(*FNGetEntityAPI2)(HL::DLL_FUNCTIONS*, int*);
+    typedef int(*FNGetEntityAPI)(HL::DLL_FUNCTIONS*, int);
 }

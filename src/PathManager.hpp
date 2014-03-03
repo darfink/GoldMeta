@@ -2,6 +2,7 @@
 
 #include <boost/filesystem.hpp>
 #include <unordered_map>
+#include <map>
 #include <string>
 
 #include "Exception.hpp"
@@ -57,7 +58,8 @@ namespace gm {
 
     private:
         // We want to avoid any abnormally long variable type names
-        typedef std::unordered_map<Path, fs::path> PathCollection;
+        //typedef std::unordered_map<Path, fs::path> PathCollection;
+        typedef std::map<Path, fs::path> PathCollection;
 
         // Private members
         PathCollection mPaths;
