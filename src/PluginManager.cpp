@@ -2,7 +2,7 @@
 #include <boost/range/adaptor/map.hpp>
 #include <boost/tokenizer.hpp>
 #include <boost/range.hpp>
-#include <iostream>
+#include <fstream>
 
 #include "PluginManager.hpp"
 #include "Plugin/GoldPlugin.hpp"

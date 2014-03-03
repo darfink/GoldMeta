@@ -14,7 +14,7 @@ namespace gm {
         mCallFunc(nullptr),
         mName(name)
     {
-        mCodeGenerator = std::make_unique<CodeGenerator>(this);
+        mCodeGenerator = std::unique_ptr<CodeGenerator>(new CodeGenerator(this));
     }
 
     Function::~Function() { }

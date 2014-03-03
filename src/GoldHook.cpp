@@ -1,5 +1,6 @@
 #include <boost/range.hpp>
-#include <unordered_map>
+//#include <unordered_map> TODO: Fixed enums and unordered maps hash
+#include <map>
 #include <functional>
 #include <fstream>
 #include <cstring>
@@ -8,7 +9,7 @@
 #include "OS/OS.hpp"
 
 namespace gm {
-    GoldHook::GoldHook(std::shared_ptr<PathManager> pathManager, std::string dbFile) :
+    GoldHook::GoldHook(std::shared_ptr<PathManager> pathManager, std::string /*dbFile*/) :
         mPathManager(pathManager)
     {
         /*fs::path dbPath = mPathManager->GetPathObject(PathManager::GoldMetaData) / dbFile;
@@ -58,7 +59,7 @@ namespace gm {
     }
 
     IModuleFunction* GoldHook::GetEngineFunction(PluginId id, EngineAPI function) {
-        static const std::unordered_map<EngineAPI, std::string> mapping = {
+        static const std::map<EngineAPI, std::string> mapping = {
             { EngineAPI::PrecacheModel, "PrecacheModel" },
             { EngineAPI::PrecacheSound, "PrecacheSound" },
             { EngineAPI::SetModel,      "SetModel"      },

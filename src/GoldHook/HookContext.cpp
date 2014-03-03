@@ -1,5 +1,6 @@
 #include <cstring>
 
+#include "../Default.hpp"
 #include "HookContext.hpp"
 #include "ConventionInfo.hpp"
 

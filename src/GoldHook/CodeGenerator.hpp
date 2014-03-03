@@ -41,32 +41,33 @@ namespace gm {
         /// <summary>
         /// Pushes a parameter on the stack from a specified source
         /// </summary>
-        size_t PushParameter(const DataType& type, AsmJit::Mem source);
+        size_t PushParameter(const DataType& type, asmjit::host::Mem source);
 
         /// <summary>
         /// Retrieves a return value and stores it in the specified destination
         /// </summary>
-        void SaveReturn(const DataType& type, AsmJit::Mem destination);
+        void SaveReturn(const DataType& type, asmjit::host::Mem destination);
 
         /// <summary>
         /// Sets the hook handler return value from the specified source
         /// </summary>
-        void SetReturn(const DataType& type, AsmJit::Mem source);
+        void SetReturn(const DataType& type, asmjit::host::Mem source);
 
         /// <summary>
         /// Performs a bitwise copy procedure
         /// </summary>
-        void PerformBitwiseCopy(size_t size, const AsmJit::Mem& source, const AsmJit::Mem& destination);
+        void PerformBitwiseCopy(size_t size, const asmjit::host::Mem& source, const asmjit::host::Mem& destination);
 
         /// <summary>
         /// Copies a data from from source to destination in the most efficient way for the type
         /// </summary>
-        void CopyData(const DataType& type, AsmJit::Mem source, AsmJit::Mem destination);
+        void CopyData(const DataType& type, asmjit::host::Mem source, asmjit::host::Mem destination);
 
         // Private members
         IFunctionBase* mFunctionBase;
         ConventionInfo mConventionInfo;
-        std::unique_ptr<AsmJit::X86Assembler> mAssembler;
+        asmjit::JitRuntime mJitRuntime;
+        std::unique_ptr<asmjit::host::Assembler> mAssembler;
         std::shared_ptr<void> mHookHandler;
         std::shared_ptr<void> mCallHook;
         bool mHasNonHiddenReturn;

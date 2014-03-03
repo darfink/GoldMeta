@@ -5,16 +5,18 @@
 #include <cassert>
 #include <vector>
 
+#include "../Default.hpp"
 #include "HookContext.hpp"
 #include "CodeGenerator.hpp"
 #include "VTableOffset.hpp"
 
-// Usually these declarations should be avoided
-using namespace AsmJit;
+// We want to keep these to a minimum
+using namespace asmjit;
+using namespace asmjit::host;
 
 namespace gm {
     CodeGenerator::CodeGenerator(IFunctionBase* function) :
-        mAssembler(new X86Assembler),
+        mAssembler(new Assembler(&mJitRuntime)),
         mHasNonHiddenReturn(false),
         mFunctionBase(function),
         mLastArgument(0)
@@ -103,7 +105,7 @@ namespace gm {
             }
 
             // Retrieve the assembly code, ready for execution
-            mCallHook.reset(mAssembler->make(), [](void* code) { MemoryManager::getGlobal()->free(code); });
+            mCallHook.reset(mAssembler->make(), [](void* code) { MemoryManager::getGlobal()->release(code); });
         }
 
         return reinterpret_cast<FNCallHook>(mCallHook.get());
@@ -317,7 +319,7 @@ namespace gm {
                 mAssembler->dptr(nullptr);
             }
 
-            mHookHandler.reset(mAssembler->make(), [](void* code) { MemoryManager::getGlobal()->free(code); });
+            mHookHandler.reset(mAssembler->make(), [](void* code) { MemoryManager::getGlobal()->release(code); });
         }
 
         return mHookHandler.get();
@@ -552,7 +554,7 @@ namespace gm {
         }
     }
 
-    void CodeGenerator::SetReturn(const DataType& type, AsmJit::Mem source) {
+    void CodeGenerator::SetReturn(const DataType& type, Mem source) {
         size_t typeSize = type.GetSize();
 
         switch(type.GetType()) {
@@ -597,7 +599,7 @@ namespace gm {
         }
     }
 
-    void CodeGenerator::PerformBitwiseCopy(size_t size, const AsmJit::Mem& source, const AsmJit::Mem& destination) {
+    void CodeGenerator::PerformBitwiseCopy(size_t size, const Mem& source, const Mem& destination) {
         uint dwords = size / sizeof(size_t);
         uint bytes = size % sizeof(size_t);
 
@@ -616,7 +618,7 @@ namespace gm {
     }
 
     // May only touch the EAX register (and x87 floating point stack)
-    void CodeGenerator::CopyData(const DataType& type, AsmJit::Mem source, AsmJit::Mem destination) {
+    void CodeGenerator::CopyData(const DataType& type, Mem source, Mem destination) {
         size_t typeSize = type.GetSize();
 
         switch(type.GetType()) {

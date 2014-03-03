@@ -31,7 +31,7 @@ namespace gm {
         if(argv == nullptr) {
             throw Exception("couldn't retrieve command line arguments");
         }
-        
+
         for(int i = 0; i < argc; i++) {
             // Convert the argument string to UTF-8 encoding, so we use the encoding native for this library
             size_t sizeRequired = WideCharToMultiByte(CP_UTF8, 0, argv[i], wcslen(argv[i]), nullptr, 0, nullptr, nullptr);
@@ -46,21 +46,21 @@ namespace gm {
 #endif
         return commandLine;
     }
-    
+
     std::vector<Module> GetProcessModules() {
         // Store all modules in a vector
         std::vector<Module> modules;
-        
+
 #ifdef _WIN32
         HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, 0);
-        
+
         if(snapshot == INVALID_HANDLE_VALUE) {
             throw Exception("couldn't create module snapshot");
         }
-        
+
         MODULEENTRY32 entry = {0};
         entry.dwSize = sizeof(MODULEENTRY32);
-        
+
         for(BOOL result = Module32First(snapshot, &entry); result; result = Module32Next(snapshot, &entry)) {
             modules.push_back({ fs::path(entry.szExePath), static_cast<void*>(entry.modBaseAddr), entry.modBaseSize });
         }
@@ -119,9 +119,8 @@ namespace gm {
         return fs::path(path.begin(), path.end());
 #else
         Dl_info info;
-        std::memset(&info, 0, sizeof(Dl_info));
 
-        if (dladdr(memory, &info)) {
+        if(dladdr(memory, &info)) {
             return fs::path(info.dli_fname);
         } else {
             throw Exception("couldn't query memory information");
@@ -129,7 +128,7 @@ namespace gm {
 #endif
     }
 
-    gm::OS GetCurrentOS() {
+    OS GetCurrentOS() {
 #ifdef _WIN32
         return OS::Windows;
 #elif __linux__

@@ -109,7 +109,7 @@ namespace gm {
                 //this->SetupEntityHook();
 
                 SignatureScanner ss(*reinterpret_cast<uintptr_t*>(mEngineFunctions));
-                uintptr_t lol = ss.FindSignature({ 0x33, 0xFF, 0x85, 0xC0, 0x7E, 0x00, 0x8B, 0x5D, 0x00, 0xBE }, "xxxxx?xx?x", -11);
+                /*uintptr_t lol = ss.FindSignature({ 0x33, 0xFF, 0x85, 0xC0, 0x7E, 0x00, 0x8B, 0x5D, 0x00, 0xBE }, "xxxxx?xx?x", -11);
 
                 IModuleFunction* func = mGoldHook->GetFunction(PluginId(1), "FunctionFromName", reinterpret_cast<void*>(lol));
                 func->SetListener(brute_cast<void*>(&MetaMain::EntityHook), this, Tense::Pre);
@@ -159,7 +159,7 @@ namespace gm {
 
                 double test = 8223372036854774807.123;
                 double res = original(test, { 1.0f, 2.0f, 3.0f }, { 4.0f, 5.0f, 6.0f }, 7.0f, 8.0f, 1337, 5, 25, 9.0f, nullptr, true, 2143365);
-                int x = 5;
+                int x = 5;*/
                 break;
             }
         }

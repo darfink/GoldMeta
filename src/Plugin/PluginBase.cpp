@@ -33,6 +33,6 @@ namespace gm {
 
     HL::FNEntity PluginBase::GetEntity(const std::string& entity) {
         // Simply just check if the library exports this specific entity
-        return static_cast<HL::FNEntity>(mLibrary.GetSymbol(entity, false));
+        return brute_cast<HL::FNEntity>(mLibrary.GetSymbol(entity, false));
     }
 }

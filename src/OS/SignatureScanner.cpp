@@ -1,3 +1,4 @@
+#include <GoldMeta/Shared.hpp>
 #include <cassert>
 #include <cstring>
 #include <vector>
@@ -5,6 +6,7 @@
 # include <windows.h>
 #else
 # include <dlfcn.h>
+# include <sys/stat.h>
 #endif
 
 #include "SignatureScanner.hpp"
@@ -39,20 +41,23 @@ namespace gm {
         }
 
         mBaseLength = static_cast<size_t>(ntHeader->OptionalHeader.SizeOfImage);
-#else
+#else /* POSIX */
         Dl_info info;
         struct stat buf;
 
-        if(!dladdr(address, &info)) {
+        if(!dladdr(reinterpret_cast<void*>(address), &info)) {
+            throw Exception("couldn't retrieve memory information from address");
         }
 
         if(!info.dli_fbase || !info.dli_fname) {
+            throw Exception("the retrieved memory information was invalid");
         }
 
-        if(stat(info.dli_fname, &buf) != 0) {
+        if(stat(info.dli_fname, &buf) == -1) {
+            throw Exception("couldn't query owning process executable");
         }
 
-        mBaseAddress = reinterpret_cast<uint>(info.dli_fbase);
+        mBaseAddress = brute_cast<uint>(info.dli_fbase);
         mBaseLength = buf.st_size;
 #endif
     }

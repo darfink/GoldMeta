@@ -23,7 +23,7 @@ namespace GoldMeta { namespace Plugin {
 	{
 		assert(engineGlobals != nullptr);
 		assert(gSharedAPI == nullptr); /* If the shared API is not null, that means a 'SharedAPI' instance has already been created */
-		
+
 		mPluginManager = container->resolve<Interface::IPluginManager>();
 		mModuleManager = container->resolve<Interface::IModuleManager>();
 		mGameLibrary = container->resolve<Interface::IGameLibrary>();

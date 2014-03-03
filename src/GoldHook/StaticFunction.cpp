@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "StaticFuntion.hpp"
+#include "../OS/MemoryRegion.hpp"
 
 namespace gm {
     // 'jmp <relative>' - This is probably the best detour type to use
@@ -46,26 +47,20 @@ namespace gm {
     }
 
     void StaticFunction::SetDetour(bool enabled) {
+        // Ensure that we are working with a valid target
+        assert(mBytesDisassembled > 0);
+
         if(mDetoured == enabled) {
             return;
         }
 
-        // Ensure that we are working with a valid target
-        assert(mBytesDisassembled > 0);
-
-        ulong oldProtection;
-        if(!VirtualProtect(mOriginal, mBytesDisassembled, PAGE_EXECUTE_READWRITE, &oldProtection)) {
-            throw Exception("couldn't change protection flags at target address");
-        }
+        MemoryRegion region(reinterpret_cast<uintptr_t>(mOriginal), mBytesDisassembled);
+        region.SetFlags(MemoryRegion::Execute | MemoryRegion::Read | MemoryRegion::Write);
 
         if(enabled == true) {
             this->ApplyHook();
         } else /* Remove hook */ {
             this->RemoveHook();
-        }
-
-        if(!VirtualProtect(mOriginal, mBytesDisassembled, oldProtection, &oldProtection)) {
-            throw Exception("couldn't reset protection flags at target address");
         }
     }
 
@@ -75,8 +70,8 @@ namespace gm {
         assert(callback != nullptr);
 
         // Allocate executable memory to backup the original function (i.e the trampoline)
-        mTrampoline.reset(reinterpret_cast<byte*>(AsmJit::MemoryManager::getGlobal()->alloc(mBytesDisassembled + GM_ARRAY_SIZE(PatchRelative))), [](byte* memory) {
-            AsmJit::MemoryManager::getGlobal()->free(memory);
+        mTrampoline.reset(reinterpret_cast<byte*>(asmjit::MemoryManager::getGlobal()->alloc(mBytesDisassembled + GM_ARRAY_SIZE(PatchRelative))), [](byte* memory) {
+            asmjit::MemoryManager::getGlobal()->release(memory);
         });
 
         // Copy the original function bytes to our trampoline
